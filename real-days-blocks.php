@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Real Days Blocks
  * Description:       Reusable review-article components for The Real Days. Styling lives on one settings page (no reinstall needed); new/updated components are pulled with a single "Check for Updates" button on that same page.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Requires at least: 6.2
  * Requires PHP:      7.4
  * Author:            The Real Days
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 define( 'RDB_PATH', plugin_dir_path( __FILE__ ) );
 define( 'RDB_URL', plugin_dir_url( __FILE__ ) );
-define( 'RDB_VERSION', '1.0.0' );
+define( 'RDB_VERSION', '1.0.1' );
 define( 'RDB_SLUG', 'real-days-blocks' );
 
 define( 'RDB_GH_USER', 'courtneydays' );
@@ -121,18 +121,20 @@ function rdb_get_css() {
 	return $css ? $css : '';
 }
 
-add_action( 'wp_enqueue_scripts', function () {
-	if ( is_singular() ) {
-		wp_register_style( 'rdb-style', false, array(), RDB_VERSION );
-		wp_enqueue_style( 'rdb-style' );
-		wp_add_inline_style( 'rdb-style', rdb_get_css() );
+/**
+ * enqueue_block_assets (not enqueue_block_editor_assets) is the hook
+ * Gutenberg actually pulls into the block editor's iframed canvas as
+ * well as the frontend — enqueue_block_editor_assets only reaches the
+ * outer admin page, which is outside that iframe, so styles added
+ * there never touch the block preview. This one hook covers both.
+ */
+add_action( 'enqueue_block_assets', function () {
+	if ( ! is_admin() && ! is_singular() ) {
+		return;
 	}
-} );
-
-add_action( 'enqueue_block_editor_assets', function () {
-	wp_register_style( 'rdb-style-editor', false, array(), RDB_VERSION );
-	wp_enqueue_style( 'rdb-style-editor' );
-	wp_add_inline_style( 'rdb-style-editor', rdb_get_css() );
+	wp_register_style( 'rdb-style', false, array(), RDB_VERSION );
+	wp_enqueue_style( 'rdb-style' );
+	wp_add_inline_style( 'rdb-style', rdb_get_css() );
 } );
 
 /* =====================================================================
