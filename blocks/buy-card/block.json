@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "rdb/buy-card",
+	"title": "RD: Buy Card",
+	"category": "real-days",
+	"icon": "cart",
+	"description": "Product purchase card: photo, optional yellow tag, name, price specs, CTA button.",
+	"textdomain": "real-days-blocks",
+	"attributes": {
+		"pickTag": { "type": "string", "default": "" },
+		"imageUrl": { "type": "string", "default": "" },
+		"imageAlt": { "type": "string", "default": "" },
+		"name": { "type": "string", "default": "Product Name" },
+		"productType": { "type": "string", "default": "" },
+		"specs": {
+			"type": "array",
+			"default": [
+				{ "value": "$0", "label": "handle" }
+			]
+		},
+		"finePrint": { "type": "string", "default": "" },
+		"ctaLabel": { "type": "string", "default": "View product" },
+		"ctaUrl": { "type": "string", "default": "#" }
+	},
+	"supports": { "html": false }
+}
