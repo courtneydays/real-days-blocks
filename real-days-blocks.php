@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Real Days Blocks
  * Description:       Reusable review-article components for The Real Days. Styling lives on one settings page (no reinstall needed); new/updated components are pulled with a single "Check for Updates" button on that same page.
- * Version:           1.0.1
+ * Version:           1.0.2
  * Requires at least: 6.2
  * Requires PHP:      7.4
  * Author:            The Real Days
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 define( 'RDB_PATH', plugin_dir_path( __FILE__ ) );
 define( 'RDB_URL', plugin_dir_url( __FILE__ ) );
-define( 'RDB_VERSION', '1.0.1' );
+define( 'RDB_VERSION', '1.0.2' );
 define( 'RDB_SLUG', 'real-days-blocks' );
 
 define( 'RDB_GH_USER', 'courtneydays' );
